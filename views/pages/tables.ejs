@@ -1,0 +1,73 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Table Users</h4>
+            <p class="card-category"> Here is a subtitle for this table</p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Country
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    User name  
+                  </th>
+                  <th>
+                    Action
+                  </th>
+                </thead>
+                <tbody>
+                  <% data.forEach( (user) => { %>
+                  <tr>
+                    <td>
+                      <%= user.id %>
+                    </td>
+                    <td>
+                      <%= user.fullname %>
+                    </td>
+                    <td>
+                      Viet Nam
+                    </td>
+                    <td>
+                      <%= user.email %>
+                    </td>
+                    <td>
+                      <%= user.username %>
+                    </td>
+                    <td style="z-index:100">
+                      <a class="text-light" href="user/<%= user.id %>">
+                        <button class="btn btn-sm btn-primary">
+                          Edit
+                        </button>
+                      </a>
+                      <a class="text-light" href="table/<%= user.id %>">
+                        <button class="btn btn-sm btn-danger">
+                          Delete
+                        </button>
+                      </a>
+                    </td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
