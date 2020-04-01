@@ -1,17 +1,13 @@
-const mysql = require('mysql');
-var connection = mysql.createConnection({
-    host     : '127.0.0.1',
-    user     : 'root',
-    password : '',
-    database : 'db'
-  });
-connection.connect();
-const renderTable = (req, res)=>{
-    connection.query('SELECT * FROM users', function (err, result) {
-      if (err) throw err;
-      res.render('pages/tables',{data: result})
-    });
-};
+const knex = require('../../knex/knex');
+const renderTable = async(req, res) =>{
+    await knex('users').select('*')
+    .then((result) =>{
+        return res.render('pages/tables',{data: result});
+    })
+    .carth((err) =>{
+        if(err) throw err;
+    })
+}
 const renderLogin = (req, res) => {
     res.render('pages/login', { layout: false });
 };
