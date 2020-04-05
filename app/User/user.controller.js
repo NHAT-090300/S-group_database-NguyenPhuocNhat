@@ -14,6 +14,12 @@ const renderLogin = (req, res) => {
 const renderRegister = (req, res) => {
     res.render('pages/register', { layout: false });
 };
+<<<<<<< HEAD
+=======
+const renderProList = (req, res) => {
+    res.render('pages/productList');
+}
+>>>>>>> c07d5bfc4cab3803f2025c9b8b213cd8fcc4d11d
 const renderUser = (req, res) => {
     res.render('pages/user');
 };
@@ -50,4 +56,5 @@ module.exports = {
     renderTypography,
     renderUpgrade,
     renderRtl,
+    renderProList
 };

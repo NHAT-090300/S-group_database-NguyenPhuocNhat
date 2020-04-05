@@ -12,6 +12,10 @@ const {
   renderTypography,
   renderUpgrade,
   renderRtl,
+<<<<<<< HEAD
+=======
+  renderProList
+>>>>>>> c07d5bfc4cab3803f2025c9b8b213cd8fcc4d11d
 } = require('../app/User/user.controller');
 const {
   registerMethod,
@@ -46,6 +50,7 @@ router.post('/login',userIsAuth,loginMethod);
 //render pages
 router.get('/user',userIsNotAuth,renderUser);
 router.get('/',userIsNotAuth,renderHomepage);
+router.get('/product',userIsNotAuth,renderProList);
 router.get('/icons',userIsNotAuth,renderIcon);
 router.get('/table',userIsNotAuth,renderTable);
 router.get('/map',userIsNotAuth,renderMap);
