@@ -1,24 +1,19 @@
 const knex = require('../../knex/knex');
-var mysql      = require('mysql');
 const bcrypt = require('bcrypt');
-var flash = require('connect-flash-plus');
 const { check, validationResult } = require('express-validator');
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const hash = bcrypt.hashSync(myPlaintextPassword, salt);
-var connection = mysql.createConnection({
-  host     : '127.0.0.1',
-  user     : 'root',
-  password : '',
-  database : 'db'
-});
 
+// register
 const registerMethod = async (req, res) => {
-  const checkEmail = check('email').isEmail();
-  const checkName = check('Username').isEmpty();
-  const checkPassword = check('password').isLength({ min: 6 });
-  if(!checkEmail && !checkPassword && !checkName) {
+  check('username').isEmail(),
+  check('password').isLength({ min: 6 })
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.redirect('/resgister')
+  }else {
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
     await knex('users').insert({
       email: req.body.email,
@@ -27,19 +22,31 @@ const registerMethod = async (req, res) => {
       password: hashedPassword,
     });
     return res.redirect('/login');
-  }else{
-    return res.redirect('/register');
   }
 };
-
-const selectUpdate = (req, res)=>{
-  const id = req.params.id;
-  connection.query('SELECT * FROM users WHERE id = ?',[id], function (err, result) {
-    if (err) throw err;
-    res.render('pages/user',{
-      user : result[0]
-    })
-  });
+//login
+const loginMethod = async (req, res) => {
+  const compasre = bcrypt.compareSync(req.body.password, hash);
+  const hasUser = await knex('users').where({
+    email: req.body.email,
+    password: compasre,
+  }).first();
+  if (typeof hasUser === 'undefined') {
+    return res.redirect('/login');
+  }
+  req.session.user = hasUser;
+  return res.redirect('/');
+};
+//update
+const selectUpdate = async (req, res)=>{
+  let id = req.params.id;
+  await knex('users').whereRaw('id = ?',id)
+  .then((result) =>{
+    res.render('pages/user',{ user : result[0] })
+  })
+  .catch((err) =>{
+      if (err) throw err;
+  })
 };
 const update = async (req, res) => {
   await knex('users').where({
@@ -51,50 +58,38 @@ const update = async (req, res) => {
   });
   return res.redirect('/table');
 };
+//delete
+const Delete = async (req, res) => {
+  await knex("users").where({id: req.params.id}).delete();
+  return res.redirect('/table');
+}
 
-
-const loginMethod = async (req, res) => {
-  const compasre = bcrypt.compareSync(req.body.password, hash)
-  const hasUser = await knex('users').where({
-    email: req.body.email,
-    password: compasre,
-  }).first();
-  if (typeof hasUser === 'undefined') {
-    return res.redirect('/login');
-  }
-  req.session.user = hasUser;
-  return res.redirect('/');
-};
-
+// home
 const renderHomepage = (req, res) => {
   res.locals = {
     title: 'Administrator Board',
   };
   return res.render('pages/dashboard');
 };
-
+//logout
 const logOut = (req, res) => {
   req.session.destroy();
   res.redirect('/login')
 }
-
+//authentication
 const userIsAuth = (req, res, next) => {
   if (typeof req.session.user !== 'undefined') {
     return res.redirect('/');
   }
   return next();
 };
-
 const userIsNotAuth = (req, res, next) => {
   if (typeof req.session.user !== 'undefined') {
     return next();
   }
   return res.redirect('/login');
 }
-const Delete = async (req, res) => {
-  await knex("users").where({id: req.params.id}).delete();
-  return res.redirect('/table');
-}
+
 module.exports = {
   registerMethod,
   loginMethod,

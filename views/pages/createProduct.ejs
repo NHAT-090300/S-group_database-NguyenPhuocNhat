@@ -1,0 +1,26 @@
+<div class="content">
+    <div class="container-fluid ">
+      <div class="row d-flex">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">create product</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/product/createProduct" style="margin-left:50px; display:inline" >
+                    <input class="border-right-0  mr-3 border-left-0 border-top-0 border-primary" name="product" type="text" placeholder="Product's Name">
+                    <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="price" type="text" placeholder="Price">
+                    <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="color" type="text" placeholder="Color">
+                    <input type="hidden" name="_method" value="POST">
+                    <a class="text-light ml-5">
+                      <button class="btn btn-sm btn-success ">
+                        Save
+                      </button>
+                    </a>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

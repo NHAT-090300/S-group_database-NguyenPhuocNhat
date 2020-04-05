@@ -8,7 +8,7 @@ var expressLayouts = require('express-ejs-layouts');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 var indexRouter = require('./routes/index');
-var methodOverride = require('method-override')
+var methodOverride = require('method-override');
 
 var app = express();
 
@@ -45,8 +45,8 @@ app.use(session({
   key: 'session_cookie_name',
   secret: 'session_cookie_secret',
   store: sessionStore,
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true,
 }));
 app.use(session({ secret: 'session_cookie_secret', cookie: { maxAge: 60000 }}))
 app.use('/', indexRouter);
