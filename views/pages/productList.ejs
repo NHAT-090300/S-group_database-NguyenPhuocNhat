@@ -2,38 +2,33 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <div class="card card-plain">
+          <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title mt-0">Product Type</h4>
+              <h4 class="card-title ">Table Users</h4>
               <p class="card-category"> Here is a subtitle for this table</p>
-            </div>
-<<<<<<< HEAD
-            <a class="text-light" href="/product/createType">
+              <a class="text-light" href="/product/createType">
                 <button class="btn btn-sm btn-primary" >
-=======
-            <a class="text-light">
-                <button class="btn btn-sm btn-primary">
->>>>>>> c07d5bfc4cab3803f2025c9b8b213cd8fcc4d11d
                   Create Product Type
                 </button>
             </a>
+            </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-hover">
-<<<<<<< HEAD
-                  <thead>
+                <table class="table">
+                  <thead class=" text-primary">
                     <th>
-                      Product ID
+                      ID
                     </th>
                     <th>
-                      Product  Type
+                      product type
                     </th>
                     <th class="text-center">
-                      Option
+                      potion
                     </th>
+ 
                   </thead>
                   <tbody>
-                    <% data.forEach((type) =>{ %>
+                    <% data.forEach( (type) => { %>
                     <tr>
                       <td>
                         <%= type.product_type_id %>
@@ -43,95 +38,45 @@
                       </td>
                       <td style="z-index:100" class="text-center">
                         <a class="text-light" href="/product/show_product_type/<%= type.product_type_id %>">
-                          <button class="btn btn-sm btn-primary">
-                            Show Product
-                          </button>
-                        </a>
-                        <a class="text-light" onclick="checkDelete()" href="product/deleteProductType/<%= type.product_type_id %>">
-                          <button class="btn btn-sm btn-danger">
-                            Delete
-                          </button>
-                        </a>
-                        <a class="text-light" href="/product/createProduct">
-                          <button class="btn btn-sm btn-primary">
-                            Create Product
-                          </button>
-                        </a>
+                            <button class="btn btn-sm btn-primary">
+                              Show Product
+                            </button>
+                          </a>
+                          <a class="text-light" onclick="checkDelete()" href="product/deleteProductType/<%= type.product_type_id %>">
+                            <button class="btn btn-sm btn-danger">
+                              Delete
+                            </button>
+                          </a>
+                          <a class="text-light" href="/product/createProduct">
+                            <button class="btn btn-sm btn-primary">
+                              Create Product
+                            </button>
+                          </a>
                       </td>
                     </tr>
                     <% }); %>
-=======
-                  <thead class="">
-                    <th>
-                      ID
-                    </th>
-                    <th>
-                      Name
-                    </th>
-                    <th>
-                      Country
-                    </th>
-                    <th>
-                      City
-                    </th>
-                    <th>
-                      Salary
-                    </th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        1
-                      </td>
-                      <td>
-                        Dakota Rice
-                      </td>
-                      <td>
-                        Niger
-                      </td>
-                      <td>
-                        Oud-Turnhout
-                      </td>
-                      <td>
-                        $36,738
-                      </td>
-                    </tr>
-                    
->>>>>>> c07d5bfc4cab3803f2025c9b8b213cd8fcc4d11d
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
-<<<<<<< HEAD
         <script>
-          function checkDelete(req, res){
-            alert('delete product');
-          }
-        </script>
-=======
->>>>>>> c07d5bfc4cab3803f2025c9b8b213cd8fcc4d11d
+            function checkDelete(req, res){
+              alert('delete product');
+            }
+          </script>
         <div class="col-md-12">
             <div class="card card-plain">
               <div class="card-header card-header-primary">
                 <h4 class="card-title mt-0">Product Type</h4>
                 <p class="card-category"> Here is a subtitle for this table</p>
               </div>
-<<<<<<< HEAD
-=======
-              <a class="text-light">
-                <button class="btn btn-sm btn-primary">
-                  Create Product
-                </button>
-              </a>
->>>>>>> c07d5bfc4cab3803f2025c9b8b213cd8fcc4d11d
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <thead class="">
                       <th>
-<<<<<<< HEAD
                         Product id
                       </th>
                       <th>
@@ -145,66 +90,13 @@
                       </th>
                     </thead>
                     <tbody>
-                      <!-- <tr>
-                        <% data.forEach((product) =>{ %>
-=======
-                        ID
-                      </th>
-                      <th>
-                        Name
-                      </th>
-                      <th>
-                        Country
-                      </th>
-                      <th>
-                        City
-                      </th>
-                      <th>
-                        Salary
-                      </th>
-                    </thead>
-                    <tbody>
-                      <tr>
->>>>>>> c07d5bfc4cab3803f2025c9b8b213cd8fcc4d11d
-                        <td>
-                          1
-                        </td>
-                        <td>
-<<<<<<< HEAD
-                          <%= product.product_id %>
-                        </td>
-                        <td>
-                          <%= product.product %>
-                        </td>
-                        <td>
-                          <%= product.color %>
-                        </td>
-                        <td>
-                          <%= product.price %>
-                        </td>
-                        <% }); %>
-                      </tr> -->
-=======
-                          Dakota Rice
-                        </td>
-                        <td>
-                          Niger
-                        </td>
-                        <td>
-                          Oud-Turnhout
-                        </td>
-                        <td>
-                          $36,738
-                        </td>
-                      </tr>
-                      
->>>>>>> c07d5bfc4cab3803f2025c9b8b213cd8fcc4d11d
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
           </div>
+      </div>
       </div>
     </div>
   </div>

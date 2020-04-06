@@ -33,13 +33,6 @@ const proTypeDelete = async (req, res) => {
     await knex('productType').where({product_type_id: req.params.product_type_id}).delete();
     return res.redirect('/product');
 }
-// const fullJoin = (req, res) => {
-//     knex.select('*').from('product')
-//     .fullOuterJoin('productType', 'product.type_id.id', 'product.product_type_id')
-//     .then((result)=> {
-//         console.log(result);
-//     })
-// }
 module.exports = {
     proTypePost,
     productPost,
