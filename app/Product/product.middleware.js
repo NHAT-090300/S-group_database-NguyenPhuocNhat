@@ -12,17 +12,19 @@ const proTypePost = async(req, res) => {
     }); 
 };
 const showProduct = async (req, res) => {
-    await knex('productType').where({product_type_id : req.params.product_type_id})
-    .select('*')
-    .then((result) => {
-        return res.render('pages/ShowProduct',{data_ : result})
-    })
-}
+    const products = await knex('productType')
+    .rightJoin('product', 'productType.product_type_id', 'product.type_id')
+    .where('productType.product_type_id', req.params.product_type_id);
+    console.log(products)
+    return res.render('pages/ShowProduct', { products });
+};
+
 const productPost = async (req, res) => {
     await knex('product').insert({
         product : req.body.product,
         price : req.body.price,
         color : req.body.color,
+        type_id : req.body.type_id 
     }).then((result) => {
         return res.redirect('/product');
     }).catch((err) => {
@@ -38,5 +40,4 @@ module.exports = {
     productPost,
     proTypeDelete,
     showProduct
-    // fullJoin
 }

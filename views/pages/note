@@ -1,4 +1,4 @@
-<div class="content">
+<!-- <div class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -15,42 +15,20 @@
                       Id
                     </th>
                     <th>
-                      type
-                    </th>
-
-                    <th>
                       Product's Name
                     </th>
-                    <th>
-                      color
-                    </th>
-                    <th>
-                      price
-                    </th>
-                   
                   </thead>
                   <tbody>
+                    <% data_.forEach( (type) => { %>
                     <tr>
-                      <% products.forEach( (product) => {%>
                       <td>
-                        <%= product.product_type_id %>
+                        <%= type.product_type_id %>
                       </td>
                       <td>
-                        <%= product.product_type %>
+                        <%= type.product_type %>
                       </td>
-                      
-                      <td>
-                        <%= product.product %>
-                      </td>
-                      <td>
-                        <%= product.color %>
-                      </td>
-                      <td>
-                      <%= product.price %>
-                      </td>
-
-                      <% }); %>
                     </tr>
+                    <% }); %>
                   </tbody>
                 </table>
               </div>
@@ -59,4 +37,4 @@
         </div>
       </div>
     </div>
-  </div>
+</div> -->

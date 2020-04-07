@@ -47,7 +47,7 @@
                               Delete
                             </button>
                           </a>
-                          <a class="text-light" href="/product/createProduct">
+                          <a class="text-light" href="/product/createProduct/<%= type.product_type_id %>">
                             <button class="btn btn-sm btn-primary">
                               Create Product
                             </button>
@@ -66,37 +66,7 @@
               alert('delete product');
             }
           </script>
-        <div class="col-md-12">
-            <div class="card card-plain">
-              <div class="card-header card-header-primary">
-                <h4 class="card-title mt-0">Product Type</h4>
-                <p class="card-category"> Here is a subtitle for this table</p>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <thead class="">
-                      <th>
-                        Product id
-                      </th>
-                      <th>
-                        Product's Name
-                      </th>
-                      <th>
-                        Coney
-                      </th>
-                      <th>
-                        Color
-                      </th>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
+        </div>
       </div>
     </div>
   </div>

@@ -6,7 +6,8 @@ exports.up = (knex) => {
         table.string('color', 255).notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now()); 
-        table.integer('type_id').unsigned().references('productType.product_type_id');
+        table.integer('type_id').unsigned();
+        table.foreign('type_id').references('product_type_id').inTable('productType').onDelete('CASCADE');
     });
   };
   exports.down = (knex) => {

@@ -33,9 +33,10 @@ const loginMethod = async (req, res) => {
   }).first();
   if (typeof hasUser === 'undefined') {
     return res.redirect('/login');
+  }else{
+    req.session.user = hasUser;
+    return res.redirect('/');
   }
-  req.session.user = hasUser;
-  return res.redirect('/');
 };
 //update
 const selectUpdate = async (req, res)=>{

@@ -59,7 +59,7 @@ router.post('/product/createType',userIsNotAuth, proTypePost);
 router.get('/product/show_product_type/:product_type_id',userIsNotAuth,showProduct);
 
 router.get('/product/deleteProductType/:product_type_id',userIsNotAuth,proTypeDelete );
-router.get('/product/createProduct',userIsNotAuth, renderProduct);
+router.get('/product/createProduct/:product_type_id',userIsNotAuth, renderProduct);
 router.post('/product/createProduct',userIsNotAuth, productPost);
 
 
