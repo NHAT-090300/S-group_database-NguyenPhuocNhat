@@ -49,5 +49,5 @@ module.exports = {
     renderNotificastion,
     renderTypography,
     renderUpgrade,
-    renderRtl,
+    renderRtl
 };

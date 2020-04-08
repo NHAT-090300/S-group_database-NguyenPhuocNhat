@@ -26,10 +26,10 @@ const registerMethod = async (req, res) => {
 };
 //login
 const loginMethod = async (req, res) => {
-  const compasre = bcrypt.compareSync(req.body.password, hash);
+  // const compasre = bcrypt.compareSync(req.body.password, hash);
   const hasUser = await knex('users').where({
     email: req.body.email,
-    password: compasre,
+    password: bcrypt.compareSync(req.body.password, hash),
   }).first();
   if (typeof hasUser === 'undefined') {
     return res.redirect('/login');

@@ -28,13 +28,11 @@ const {
   renderProductType,
   renderProduct,
   renderProductList,
-} = require('../app/Product/product.controller');
-const { 
   proTypePost,
   productPost,
   proTypeDelete,
   showProduct
-} = require('../app/Product/product.middleware');
+} = require('../app/Product/product.controller');
 router.get('/logOut',logOut);
 router.get('/register',userIsAuth,renderRegister);
 router.post('/register',userIsAuth,registerMethod);
