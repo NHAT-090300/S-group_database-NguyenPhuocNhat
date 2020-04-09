@@ -1,0 +1,18 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="d-flex flex-wrap ml-3 " >
+                <% img.forEach((img) => {%>
+                <img src="/uploads/<%= img.path %>" style="height:500px">
+                <% }); %>
+                <div style="margin-left:100px;">
+                    <% product_.forEach((product) => {%>
+                    <h4><b style="color:royalblue">product's name</b> : <%= product.product %></h4>
+                    <h4><b style="color:royalblue">price</b> : <%= product.price %></h4>
+                    <h4><b style="color:royalblue">color</b> : <%= product.color %></h4>
+                    <% }); %>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

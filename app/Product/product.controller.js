@@ -51,11 +51,25 @@ const productPost = async (req, res) => {
         if (err) throw err;
     })
 }
-// delerece product type
+// delete product type
 const proTypeDelete = async (req, res) => {
     await knex('productType').where({product_type_id: req.params.product_type_id}).delete();
     return res.redirect('/product');
 }
+//
+const getProductId = async (req, res) => {
+    const img = await knex('images').where({product_id: req.params.product_id}).select('*');
+    const product_ =  await knex('product').where({product_id: req.params.product_id}).select('*')
+    return res.render('pages/products/updateProduct',{img, product_});
+}
+
+const deleteProduct = async (req, res) => {
+    await knex('images').where({product_id: req.params.product_id}).delete();
+    await knex('product').where({product_id: req.params.product_id}).delete();
+    return res.redirect('/product/upload/render_pages_product');
+
+}
+
 module.exports = {
     renderProductType,
     renderProduct,
@@ -63,5 +77,7 @@ module.exports = {
     proTypePost,
     productPost,
     proTypeDelete,
-    showProduct
+    showProduct,
+    getProductId,
+    deleteProduct
 }

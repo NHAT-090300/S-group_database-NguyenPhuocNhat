@@ -31,8 +31,16 @@ const {
   proTypePost,
   productPost,
   proTypeDelete,
-  showProduct
-} = require('../app/Product/product.controller');
+  showProduct,
+  getProductId,
+  deleteProduct
+} = require('../app/Product/product.controller'); 
+const {
+  uploadImg,
+  PagesProduct
+  // getProduct_Img
+} = require('../app/product/upload.contronler')
+// Admin and users
 router.get('/logOut',logOut);
 router.get('/register',userIsAuth,renderRegister);
 router.post('/register',userIsAuth,registerMethod);
@@ -50,15 +58,20 @@ router.get('/rtl',userIsNotAuth,renderRtl);
 router.get('/table/:id',userIsNotAuth,Delete);
 router.get('/user/:id',userIsNotAuth,selectUpdate)
 router.put('/update/:id',userIsNotAuth,update);
-//
+//products
 router.get('/product',userIsNotAuth,renderProductList);
-router.get('/product/createType',userIsNotAuth, renderProductType);
-router.post('/product/createType',userIsNotAuth, proTypePost);
-router.get('/product/show_product_type/:product_type_id',userIsNotAuth,showProduct);
+router.route('/product/createType')
+	.get(userIsNotAuth, renderProductType)
+	.post(userIsNotAuth, proTypePost);
 
-router.get('/product/deleteProductType/:product_type_id',userIsNotAuth,proTypeDelete );
+router.get('/product/show_product_type/:product_type_id',userIsNotAuth,showProduct);
+router.delete('/product/deleteProductType/:product_type_id',userIsNotAuth,proTypeDelete );
 router.get('/product/createProduct/:product_type_id',userIsNotAuth, renderProduct);
 router.post('/product/createProduct',userIsNotAuth, productPost);
+//router.get('/product/upload/render_pages_product', userIsNotAuth, PagesProduct)
+router.get('/product/upload/render_pages_product', userIsNotAuth, PagesProduct);
+router.post('/product/upload/:product_id',userIsNotAuth,uploadImg);
 
-
+router.get('/get_product/:product_id', userIsNotAuth, getProductId);
+router.delete('/delete_product/:product_id', userIsNotAuth, deleteProduct)
 module.exports = router;

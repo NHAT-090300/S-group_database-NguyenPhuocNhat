@@ -8,13 +8,15 @@ var expressLayouts = require('express-ejs-layouts');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 var indexRouter = require('./routes/index');
-var methodOverride = require('method-override')
+var methodOverride = require('method-override');
+var flash = require('connect-flash');
 
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(flash());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -60,4 +62,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 module.exports = app;

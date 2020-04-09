@@ -27,7 +27,9 @@
                     <th>
                       price
                     </th>
-                   
+                    <th>
+                      Upload
+                    </th>
                   </thead>
                   <tbody>
                     <tr>
@@ -48,9 +50,16 @@
                       <td>
                       <%= product.price %>
                       </td>
+                      <td>
+                        <form action="/product/upload/<%= product.product_id %>" method="POST" enctype="multipart/form-data">
+                          <input type="hidden" value="<%= product.product_id %>" name="product_id">
+                          <input class="btn btn-sm btn-primary " type="file" name="img" />
+                          <input type="submit" value="Upload" class="btn btn-sm btn-success "/>
+                        </form>
+                      </td>
                     </tr>
+                    <% }); %>
                   </br>
-                  <% }); %>
                   </tbody>
                 </table>
               </div>

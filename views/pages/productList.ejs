@@ -36,22 +36,22 @@
                       <td>
                         <%= type.product_type %>
                       </td>
-                      <td style="z-index:100" class="text-center">
-                        <a class="text-light" href="/product/show_product_type/<%= type.product_type_id %>">
+                      <td style="z-index:100 d-flex" class="text-center">
+                        <div class="d-flex justify-content-center">
+                          <a class="text-light" href="/product/show_product_type/<%= type.product_type_id %>">
                             <button class="btn btn-sm btn-primary">
                               Show Product
                             </button>
                           </a>
-                          <a class="text-light" onclick="checkDelete()" href="product/deleteProductType/<%= type.product_type_id %>">
-                            <button class="btn btn-sm btn-danger">
-                              Delete
-                            </button>
-                          </a>
+                          <form action="product/deleteProductType/<%= type.product_type_id %>/?_method=DELETE" method="POST"> 
+                            <button type="submit" onclick="checkDelete()"  class="btn btn-sm btn-primary">Delete</button>
+                        </form>
                           <a class="text-light" href="/product/createProduct/<%= type.product_type_id %>">
                             <button class="btn btn-sm btn-primary">
                               Create Product
                             </button>
                           </a>
+                        </div>
                       </td>
                     </tr>
                     <% }); %>
@@ -61,11 +61,11 @@
             </div>
           </div>
         </div>
-        <!-- <script>
+        <script>
             function checkDelete(req, res){
               alert('You have successfully deleted');
             }
-          </script> -->
+          </script>
         </div>
       </div>
     </div>

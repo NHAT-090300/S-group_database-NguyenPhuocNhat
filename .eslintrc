@@ -1,7 +1,8 @@
 {
     "env": {
-        "browser": true,
-        "es6": true
+        "commonjs": true,
+        "es6": true,
+        "node": true
     },
     "extends": [
         "airbnb-base"
@@ -14,12 +15,12 @@
         "ecmaVersion": 2018
     },
     "rules": {
-      "linebreak-style": 0,
-      "indent": 0,
-      "consistent-return": 0,
-      "no-underscore-dangle": 0,
-      "no-tabs": 0,
-      "dot-notation": 0,
-      "default-case": 0
+        "linebreak-style": 0,
+        "indent": 0,
+        "consistent-return": 0,
+        "no-underscore-dangle": 0,
+        "no-tabs": 0,
+        "dot-notation": 0,
+        "default-case": 0
     }
 }
