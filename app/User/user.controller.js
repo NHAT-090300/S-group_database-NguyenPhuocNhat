@@ -1,18 +1,24 @@
 const knex = require('../../knex/knex');
-const renderTable = async(req, res) =>{
+const renderTable = async (req, res) => {
     await knex('users').select('*')
-    .then((result) =>{
-        return res.render('pages/tables',{data: result});
-    })
-    .carth((err) =>{
-        if(err) throw err;
-    })
+        .then((result) => {
+            return res.render('pages/tables', {
+                data: result
+            });
+        })
+        .carth((err) => {
+            if (err) throw err;
+        })
 }
 const renderLogin = (req, res) => {
-    res.render('pages/login', { layout: false });
+    res.render('pages/login', {
+        layout: false
+    });
 };
 const renderRegister = (req, res) => {
-    res.render('pages/register', { layout: false });
+    res.render('pages/register', {
+        layout: false
+    });
 };
 const renderUser = (req, res) => {
     res.render('pages/user');
