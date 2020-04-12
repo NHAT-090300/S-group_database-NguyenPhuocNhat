@@ -3,19 +3,19 @@ const knex = require('../../knex/knex');
 const renderProductList = (req, res) => {
     knex('productType').select('*')
     .then((result) => {
-        res.render('pages/productList',{data: result})
+        res.render('pages/products/productList',{data: result})
     })
 }
 //create product type
 const renderProductType = (req, res) => {
-    res.render('pages/createType');
+    res.render('pages/products/createType');
 }
 //create product
 const renderProduct = async (req, res)=> {
     await knex('productType').select('*').where('product_type_id' , req.params.product_type_id)
     .then((result)=> {
         console.log(result);
-        res.render('pages/createProduct',{data__ : result});
+        res.render('pages/products/createProduct',{data__ : result});
     })
 }
 // post product
@@ -36,7 +36,7 @@ const showProduct = async (req, res) => {
     .rightJoin('product', 'productType.product_type_id', 'product.type_id')
     .where('productType.product_type_id', req.params.product_type_id);
     console.log(products)
-    return res.render('pages/ShowProduct', { products });
+    return res.render('pages/products/ShowProduct', { products });
 };
 
 const productPost = async (req, res) => {

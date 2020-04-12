@@ -62,13 +62,14 @@ router.put('/update/:id',userIsNotAuth,update);
 router.get('/product',userIsNotAuth,renderProductList);
 router.route('/product/createType')
 	.get(userIsNotAuth, renderProductType)
-	.post(userIsNotAuth, proTypePost);
-
+  .post(userIsNotAuth, proTypePost);
+  
 router.get('/product/show_product_type/:product_type_id',userIsNotAuth,showProduct);
 router.delete('/product/deleteProductType/:product_type_id',userIsNotAuth,proTypeDelete );
+
 router.get('/product/createProduct/:product_type_id',userIsNotAuth, renderProduct);
 router.post('/product/createProduct',userIsNotAuth, productPost);
-//router.get('/product/upload/render_pages_product', userIsNotAuth, PagesProduct)
+
 router.get('/product/upload/render_pages_product', userIsNotAuth, PagesProduct);
 router.post('/product/upload/:product_id',userIsNotAuth,uploadImg);
 

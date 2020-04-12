@@ -26,17 +26,23 @@ const registerMethod = async (req, res) => {
 };
 //login
 const loginMethod = async (req, res) => {
-  // const compasre = bcrypt.compareSync(req.body.password, hash);
-  const hasUser = await knex('users').where({
-    email: req.body.email,
-    password: bcrypt.compareSync(req.body.password, hash),
-  }).first();
-  if (typeof hasUser === 'undefined') {
-    return res.redirect('/login');
+  const user = await knex('users').where({
+    email : req.body.email,
+  })
+  .first();
+  console.log(user);
+  if (typeof user !== 'undefined') {
+    const match = await bcrypt.compare(req.body.password, user.password);
+    console.log(match)
+    if(match) {
+      req.session.user = user;
+      return res.redirect('/');
+    } else {
+      return res.redirect('/login');
+    };
   }else{
-    req.session.user = hasUser;
-    return res.redirect('/');
-  }
+    return res.redirect('/login');
+  };
 };
 //update
 const selectUpdate = async (req, res)=>{

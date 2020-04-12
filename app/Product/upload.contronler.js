@@ -23,7 +23,7 @@ const uploadImg = (req, res) => {
             }).then((result) => {
                 console.log(req.file);
                 knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*').then((result) => {
-                    return res.render('pages/productTab', {data_: result});
+                    return res.render('pages/products/productTab', {data_: result});
                 });
             })
             .catch((err) => {
@@ -35,7 +35,7 @@ const uploadImg = (req, res) => {
 
 const PagesProduct = (req, res) => {
     knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*').then((result) => {
-        return res.render('pages/productTab', {data_: result});
+        return res.render('pages/products/productTab', {data_: result});
     });
 }
 module.exports = {
