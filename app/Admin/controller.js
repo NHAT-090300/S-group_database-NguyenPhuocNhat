@@ -8,9 +8,7 @@ const saltRounds = 10;
 // register
 const registerMethod = async (req, res) => {
     check('username').isEmail(),
-        check('password').isLength({
-            min: 6
-        })
+    check('password').isLength({ min: 6 });
     errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.redirect('/resgister')

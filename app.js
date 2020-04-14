@@ -11,11 +11,11 @@ var indexRouter = require('./routes/index');
 var methodOverride = require('method-override');
 var flash = require('connect-flash');
 
-var app = express();
+require('dotenv').config()
 
+var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(flash());
 app.use(logger('dev'));
 app.use(express.json());
@@ -36,21 +36,21 @@ app.use(methodOverride(function (req, res) {
 }));
 //sessions
 var options = {
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: '',
-  database: 'db'
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
 };
 var sessionStore = new MySQLStore(options);
 app.use(session({
-  key: 'session_cookie_name',
-  secret: 'session_cookie_secret',
+  key: process.env.SESSION_KEY,
+  secret: process.env.SESSION_SECRET,
   store: sessionStore,
   resave: false,
   saveUninitialized: false
 }));
-app.use(session({ secret: 'session_cookie_secret', cookie: { maxAge: 60000 }}))
+app.use(session({ secret: process.env.SESSION_SECRET, cookie: { maxAge: 60000 }}))
 app.use('/', indexRouter);
 app.set('layout', 'index');
 app.use(function(req, res, next) {
