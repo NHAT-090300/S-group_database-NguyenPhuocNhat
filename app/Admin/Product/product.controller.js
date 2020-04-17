@@ -1,4 +1,4 @@
-const knex = require('../../knex/knex');
+const knex = require('../../../knex/knex');
 //pages product 
 const renderProductList = (req, res) => {
     knex('productType').select('*')
@@ -28,7 +28,7 @@ const proTypePost = async (req, res) => {
             product_type: req.body.product_type
         })
         .then((result) => {
-            return res.redirect('/product');
+            return res.redirect('/admin/product');
         })
         .catch((err) => {
             if (err) throw err;
@@ -52,7 +52,7 @@ const productPost = async (req, res) => {
         color: req.body.color,
         type_id: req.body.type_id
     }).then((result) => {
-        return res.redirect('/product');
+        return res.redirect('/admin/product');
     }).catch((err) => {
         if (err) throw err;
     })
@@ -62,7 +62,7 @@ const proTypeDelete = async (req, res) => {
     await knex('productType').where({
         product_type_id: req.params.product_type_id
     }).delete();
-    return res.redirect('/product');
+    return res.redirect('/admin/product');
 }
 //
 const getProductId = async (req, res) => {
@@ -85,7 +85,7 @@ const deleteProduct = async (req, res) => {
     await knex('product').where({
         product_id: req.params.product_id
     }).delete();
-    return res.redirect('/product/upload/render_pages_product');
+    return res.redirect('/admin/product/upload');
 
 }
 

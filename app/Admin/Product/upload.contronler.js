@@ -1,7 +1,7 @@
-const knex = require('../../knex/knex');
-var multer = require('multer')
-// var upload = multer({ dest: 'upload/' }) tạo folder nếu ko tìm thấy folder.
-var storage = multer.diskStorage({
+const knex = require('../../../knex/knex');
+let multer = require('multer')
+// let upload = multer({ dest: 'upload/' }) tạo folder nếu ko tìm thấy folder.
+let storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, './public/uploads');
     },
@@ -9,7 +9,7 @@ var storage = multer.diskStorage({
         cb(null, file.originalname);
     }
 });
-var upload = multer({
+let upload = multer({
     storage: storage
 }).single('img');
 
