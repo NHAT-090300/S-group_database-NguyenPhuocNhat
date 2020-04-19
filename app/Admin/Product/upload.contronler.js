@@ -1,5 +1,5 @@
-const knex = require('../../../knex/knex');
 const multer = require('multer');
+const knex = require('../../../knex/knex');
 // let upload = multer({ dest: 'upload/' }) tạo folder nếu ko tìm thấy folder.
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -29,7 +29,7 @@ const uploadImg = (req, res) => {
                     });
                 })
                 .catch(() => {
-                    return res.redirect('/product');
+                    res.redirect('/product');
                 });
         };
     });

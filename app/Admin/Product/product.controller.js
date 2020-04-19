@@ -51,7 +51,7 @@ const productPost = async (req, res) => {
         color: req.body.color,
         type_id: req.body.type_id,
     }).then(() => {
-        return res.redirect('/admin/product');
+        res.redirect('/admin/product');
     });
 };
 // delete product type

@@ -129,9 +129,6 @@
                         <input class="border-right-0  mr-3 border-left-0 border-top-0 border-primary" name="product" type="text" placeholder="Product's Name">
                         <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="price" type="text" placeholder="Price">
                         <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="color" type="text" placeholder="Color">
-                        <% data__.forEach( (typeId) => { %>
-                        <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="type_id" type="hidden" value="<%= typeId.product_type_id %>" >
-                        <% }); %>
                         <input type="hidden" name="_method" value="POST">
                         <a class="text-light ml-5">
                           <button class="btn btn-sm btn-success ">

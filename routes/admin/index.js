@@ -1,5 +1,5 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 const {
     renderUser,
@@ -16,11 +16,11 @@ const {
     registerMethod,
     loginMethod,
     logOut,
-} = require('../../app/Admin/Auth/controller');
+} = require('../../app/Admin/Auth/Authcontroller/controller');
 const {
     userIsAuth,
     userIsNotAuth,
-} = require('../../app/Admin/Auth/middleware');
+} = require('../../app/Admin/Auth/AuthMiddleware/middleware');
 const {
     renderProductType,
     renderProduct,
@@ -36,6 +36,9 @@ const {
     uploadImg,
     PagesProduct,
 } = require('../../app/Admin/product/upload.contronler');
+const {
+    IsAdmin,
+} = require('../../app/Admin/Auth/AuthMiddleware/AuthzationMiddleware');
 
 // Authentica
 router.get('/logOut', logOut);
@@ -47,18 +50,18 @@ router.route('/login')
     .post(userIsAuth, loginMethod);
 
 // render pages
-router.get('/admin', userIsNotAuth, renderHomepage);
+router.get('/admin', userIsNotAuth, IsAdmin, renderHomepage);
 router.get('/admin/user', userIsNotAuth, renderUser);
-router.get('/admin/icons', userIsNotAuth, renderIcon);
-router.get('/admin/table', userIsNotAuth, renderTable);
+router.get('/admin/icons', userIsNotAuth, IsAdmin, renderIcon);
+router.get('/admin/table', userIsNotAuth, IsAdmin, renderTable);
 router.get('/admin/table/:id', userIsNotAuth, Delete);
-router.get('/admin/user/:id', userIsNotAuth, selectUpdate)
+router.get('/admin/user/:id', userIsNotAuth, selectUpdate);
 router.put('/admin/update/:id', userIsNotAuth, update);
 
 // products
-router.get('/admin/product', userIsNotAuth, renderProductList);
+router.get('/admin/product', userIsNotAuth, IsAdmin, renderProductList);
 router.route('/admin/product/createType')
-    .get(userIsNotAuth, renderProductType)
+    .get(userIsNotAuth, IsAdmin, renderProductType)
     .post(userIsNotAuth, proTypePost);
 
 router.get('/admin/product/show_product_type/:product_type_id', userIsNotAuth, showProduct);
@@ -72,4 +75,5 @@ router.post('/admin/product/upload/:product_id', userIsNotAuth, uploadImg);
 
 router.get('/admin/get_product/:product_id', userIsNotAuth, getProductId);
 router.delete('/admin/delete_product/:product_id', userIsNotAuth, deleteProduct);
+
 module.exports = router;

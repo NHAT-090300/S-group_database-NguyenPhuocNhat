@@ -1,15 +1,18 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 const {
     userRegister,
     registerMethod,
     home,
-} = require('../../app/Client/Auth/client.controller');
+} = require('../../app/Client/Auth/clientAuthController/client.controller');
 const {
     userIsAuth,
     userIsNotAuth,
-} = require('../../app/Client/Auth/client.middleware');
+} = require('../../app/Client/Auth/clientAuthMiddleware/client.middleware');
+const {
+    IsUser,
+} = require('../../app/Client/Auth/clientAuthMiddleware/AuthzationMiddleware');
 const {
     Product,
     pageProduct,
@@ -26,14 +29,14 @@ router.route('/register')
     .get(userIsAuth, userRegister)
     .post(userIsAuth, registerMethod);
 router.route('/')
-    .get(userIsNotAuth, home);
+    .get(userIsNotAuth, IsUser, home);
 router.route('/client_product')
     .get(userIsNotAuth, Product);
 router.route('/create_productType')
     .get(userIsNotAuth, getProductType)
     .post(userIsNotAuth, setProductType);
-router.route('/create_product')
-    .get(userIsNotAuth, createProduct)
+router.route('/create_product/:product_type_id')
+    .get(userIsNotAuth, IsUser, createProduct)
     .post(userIsNotAuth, setProduct);
 router.route('/upload_image/:product_type_id')
     .get(userIsNotAuth, getUploadImage)

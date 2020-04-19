@@ -16,22 +16,19 @@ const upload = multer({
 // render product tab
 const Product = async (req, res) => {
     const data = await knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*');
-    return res.render('pages/client/clientProduct', { 
-        layout : false,
+    return res.render('pages/client/clientProduct', {
+        layout: false,
         data,
     });
 };
 // render main page product
 const pageProduct = async (req, res) => {
     const data1 = await knex('productType').select('*');
-    return res.render('pages/client/setProduct', {
-        layout : false,
-        data1,
-    });
+    return res.render('pages/client/setProduct', { layout: false, data1 });
 };
 // render page used to create the product type
 const getProductType = (req, res) => {
-    return res.render('pages/client/setProductType', { layout : false });
+    return res.render('pages/client/setProductType', { layout: false });
 };
 const setProductType = async (req, res) => {
     await knex('productType').insert({
@@ -43,7 +40,7 @@ const setProductType = async (req, res) => {
 };
 // render page used to create the product
 const createProduct = (req, res) => {
-    return res.render('pages/client/createProduct', { layout : false });
+    return res.render('pages/client/createProduct', { layout: false });
 };
 const setProduct = (req, res) => {
     knex('product').insert({
@@ -51,16 +48,15 @@ const setProduct = (req, res) => {
         price: req.body.price,
         color: req.body.color,
         type_id: req.body.type_id,
-    }).then(() => {
-        return res.redirect('/product');
     });
+    return res.redirect('/product');
 };
 // render page upaloadImage
 const getUploadImage = async (req, res) => {
     const products = await knex('productType')
         .rightJoin('product', 'productType.product_type_id', 'product.type_id')
         .where('productType.product_type_id', req.params.product_type_id);
-    return res.render('pages/client/uploadImage', { layout : false, products });
+    return res.render('pages/client/uploadImage', { layout: false, products });
 };
 
 const uploadImg = (req, res) => {
@@ -72,14 +68,13 @@ const uploadImg = (req, res) => {
                     product_id: req.body.product_id,
                 }).then((result) => {
                     console.log(req.file);
-                    let upload = knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*').then((result) => {
-                        return res.render('pages/client/pages/client/clientProduct', {
+                    knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*').then((result) => {
+                        return res.render('pages/client/clientProduct', {
                             layout: false,
-                            upload,
+                            data: result,
                         });
                     });
-                })
-                .catch(() => {
+                }).catch(() => {
                     return res.redirect('/client_product');
                 });
         }
