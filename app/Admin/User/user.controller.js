@@ -3,13 +3,10 @@ const renderTable = async (req, res) => {
     await knex('users').select('*')
         .then((result) => {
             return res.render('pages/tables', {
-                data: result
+                data: result,
             });
-        })
-        .carth((err) => {
-            if (err) throw err;
-        })
-}
+        });
+};
 const renderUser = (req, res) => {
     res.render('pages/user');
 };
@@ -19,18 +16,18 @@ const renderDashboard = (req, res) => {
 const renderIcon = (req, res) => {
     res.render('pages/icons');
 };
-//update
+// update
 const selectUpdate = async (req, res) => {
     let id = req.params.id;
     knex('users').whereRaw('id = ?', id)
         .then((result) => {
             res.render('pages/user', {
-                user: result[0]
-            })
+                user: result[0],
+            });
         })
         .catch((err) => {
             if (err) throw err;
-        })
+        });
 };
 const update = async (req, res) => {
     await knex('users').where({
@@ -42,13 +39,13 @@ const update = async (req, res) => {
     });
     return res.redirect('/admin/table');
 };
-//delete
+// delete
 const Delete = async (req, res) => {
-    await knex("users").where({
-        id: req.params.id
+    await knex('users').where({
+        id: req.params.id,
     }).delete();
     return res.redirect('/admin/table');
-}
+};
 
 // home
 const renderHomepage = (req, res) => {
@@ -66,5 +63,5 @@ module.exports = {
     renderHomepage,
     Delete,
     update,
-    selectUpdate
+    selectUpdate,
 };

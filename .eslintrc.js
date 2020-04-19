@@ -4,24 +4,22 @@ module.exports = {
         "es6": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+        "airbnb-base"
     ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": 2018,
+        "ecmaVersion": 2018
     },
-
     "rules": {
-        "linebreak-style": 0,
-        "indent": 0,
-        "consistent-return": 0,
-        "no-underscore-dangle": 0,
-        "no-tabs": 0,
-        "dot-notation": 0,
-        "default-case": 0
-      }
-};
+      "linebreak-style": 0,
+      "indent": 0,
+      "consistent-return": 0,
+      "no-underscore-dangle": 0,
+      "no-tabs": 0,
+      "dot-notation": 0,
+      "default-case": 0
+    }
+}

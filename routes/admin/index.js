@@ -8,18 +8,18 @@ const {
     renderHomepage,
     Delete,
     update,
-    selectUpdate
+    selectUpdate,
 } = require('../../app/Admin/User/user.controller');
 const {
     renderRegister,
     renderLogin,
     registerMethod,
     loginMethod,
-    logOut
+    logOut,
 } = require('../../app/Admin/Auth/controller');
-const { 
+const {
     userIsAuth,
-    userIsNotAuth
+    userIsNotAuth,
 } = require('../../app/Admin/Auth/middleware');
 const {
     renderProductType,
@@ -30,19 +30,18 @@ const {
     proTypeDelete,
     showProduct,
     getProductId,
-    deleteProduct
+    deleteProduct,
 } = require('../../app/Admin/Product/product.controller');
 const {
     uploadImg,
-    PagesProduct
+    PagesProduct,
 } = require('../../app/Admin/product/upload.contronler');
-
 
 // Authentica
 router.get('/logOut', logOut);
 router.route('/admin/register')
     .get(userIsAuth, renderRegister)
-    .post( userIsAuth, registerMethod);
+    .post(userIsAuth, registerMethod);
 router.route('/login')
     .get(userIsAuth, renderLogin)
     .post(userIsAuth, loginMethod);
@@ -56,7 +55,7 @@ router.get('/admin/table/:id', userIsNotAuth, Delete);
 router.get('/admin/user/:id', userIsNotAuth, selectUpdate)
 router.put('/admin/update/:id', userIsNotAuth, update);
 
-//products
+// products
 router.get('/admin/product', userIsNotAuth, renderProductList);
 router.route('/admin/product/createType')
     .get(userIsNotAuth, renderProductType)
@@ -72,5 +71,5 @@ router.get('/admin/product/upload', userIsNotAuth, PagesProduct);
 router.post('/admin/product/upload/:product_id', userIsNotAuth, uploadImg);
 
 router.get('/admin/get_product/:product_id', userIsNotAuth, getProductId);
-router.delete('/admin/delete_product/:product_id', userIsNotAuth, deleteProduct)
+router.delete('/admin/delete_product/:product_id', userIsNotAuth, deleteProduct);
 module.exports = router;

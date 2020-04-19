@@ -49,12 +49,15 @@
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
 						<input type="password" class="form-control" placeholder="Password" name="password" id="password">
-                    </div>
+					</div>
+					<div type="hidden" class="input-group form-group">
+						<input type="hidden"  value="1" name="admin" >
+					</div>
                     <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" id="password2" class="form-control" placeholder="Retype password">
+						<input type="password" id="password2" class="form-control" placeholder="Retype password" name="password2">
 					</div>
 					<div class="form-group">
 						<input type="submit" value='register' onclick="validator()" class="btn float-right login_btn">
@@ -66,12 +69,11 @@
 </div>
 </body>
 <script>
-	var validator = () => {
+	let validator = () => {
 	let p1 = document.getElementById("password").value;
 	let p2 = document.getElementById("password2").value;
 	if (p1 != p2){
 		alert("vui long nhap lai");
-		return false
 	}
 }
 </script>

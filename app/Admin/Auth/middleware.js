@@ -1,4 +1,4 @@
-//authentication
+// authentication
 const userIsAuth = (req, res, next) => {
     if (typeof req.session.user !== 'undefined') {
         return res.redirect('/admin');
@@ -10,8 +10,12 @@ const userIsNotAuth = (req, res, next) => {
         return next();
     }
     return res.redirect('/login');
-}
+};
+
+// const adminAuth = (req, res, next) => {
+
+// }
 module.exports = {
     userIsAuth,
-    userIsNotAuth
-}
+    userIsNotAuth,
+};
