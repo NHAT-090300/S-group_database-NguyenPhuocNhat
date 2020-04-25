@@ -1,3 +1,10 @@
+<style>
+  .tox{
+    margin: 30px;
+    border: 1px solid red;
+  }
+</style>
+
 <div class="content">
     <div class="container-fluid ">
       <div class="row d-flex">
@@ -14,6 +21,9 @@
                     <% data__.forEach( (typeId) => { %>
                     <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="type_id" type="hidden" value="<%= typeId.product_type_id %>" >
                     <% }); %>
+                    <!-- tinyMCE -->
+                    <textarea name="title" class="mt-5" id="mytextarea"></textarea>
+                     <!-- /tinyMCE -->
                     <input type="hidden" name="_method" value="POST">
                     <a class="text-light ml-5">
                       <button class="btn btn-sm btn-success ">
@@ -27,3 +37,10 @@
       </div>
     </div>
 </div>
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    selector: '#mytextarea',
+  });
+</script>

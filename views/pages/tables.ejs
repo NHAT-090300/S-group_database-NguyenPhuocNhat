@@ -11,6 +11,15 @@
             <div class="table-responsive">
               <table class="table">
                 <thead class=" text-primary">
+                  <div class="flashes mx-3">
+                    <% if(success) { %>
+                      <% success.forEach( success => { %>
+                        <p class="alert text-danger mb-0 mx-3">
+                          <%= success.msg %>
+                        </p>
+                      <% }) %>
+                     <% } %>
+                  </div>
                   <th>
                     ID
                   </th>

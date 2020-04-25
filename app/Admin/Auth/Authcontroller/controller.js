@@ -9,7 +9,7 @@ const saltRounds = 10;
 const renderLogin = (req, res) => {
     res.render('pages/login', {
         layout: false,
-        messages: req.flash('errors'),
+        errors: req.flash('errors'),
     });
 };
 
@@ -57,7 +57,7 @@ const loginMethod = async (req, res) => {
         const match = await bcrypt.compare(req.body.password, user.password);
         if (match) {
             // phần này hơi rối. em dùng for in để để lấy giá trị trong checkUser.
-            let checkUser = await knex.table('role').innerJoin('users', 'role.user_id', '=', 'users.id')
+            const checkUser = await knex.table('role').innerJoin('users', 'role.user_id', '=', 'users.id')
             .where({
                 email: req.body.email,
             }).select('admin');
@@ -74,11 +74,17 @@ const loginMethod = async (req, res) => {
                 }
             }
         } else {
-            req.flash('errors', 'error login');
+            req.flash('errors', {
+                param: 'password',
+                msg: 'password does not exist',
+            });
             return res.redirect('/login');
         }
     } else {
-        req.flash('errors', 'error login');
+        req.flash('errors', {
+            param: 'email',
+            msg: 'Email does not exist',
+        });
         return res.redirect('/login');
     }
 };

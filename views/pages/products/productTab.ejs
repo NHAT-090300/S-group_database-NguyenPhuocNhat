@@ -1,4 +1,11 @@
 <div class="content">
+    <div>
+        <ul class="d-flex ">
+            <% data.forEach((type) => {%>
+            <li style="line-height:5px; height: 30px;" class="list-group-item btn btn-outline-primary"><a href="" style=" align-items: center;" class="text-decoration-none"><%= type.product_type %></a></li>
+            <% }); %>
+        </ul>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="d-flex ml-5  flex-wrap">

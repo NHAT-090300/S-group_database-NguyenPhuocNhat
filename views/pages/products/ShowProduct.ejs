@@ -1,3 +1,4 @@
+
 <div class="content">
     <div class="container-fluid">
       <div class="row">
@@ -53,8 +54,8 @@
                       <td>
                         <form action="/admin/product/upload/<%= product.product_id %>" method="POST" enctype="multipart/form-data">
                           <input type="hidden" value="<%= product.product_id %>" name="product_id">
-                          <input class="btn btn-sm btn-primary " type="file" name="img" />
-                          <input type="submit" value="Upload" class="btn btn-sm btn-success "/>
+                          <input class=" btn btn-sm btn-primary " type="file" name="img" />
+                          <input type="submit"  value="Upload" class="upload btn btn-sm btn-success "/>
                         </form>
                       </td>
                     </tr>
@@ -69,3 +70,11 @@
       </div>
     </div>
   </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $(".upload").click(function(){
+        $(this).hide();
+    });
+  });
+</script>

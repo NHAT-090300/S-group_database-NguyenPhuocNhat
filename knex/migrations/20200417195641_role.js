@@ -7,8 +7,7 @@ exports.up = (knex) => {
       table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
     });
   };
-  
+
   exports.down = (knex) => {
     return knex.schema.dropTable('role');
 };
-  

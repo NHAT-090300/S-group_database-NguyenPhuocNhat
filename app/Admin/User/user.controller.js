@@ -4,6 +4,7 @@ const renderTable = async (req, res) => {
         .then((result) => {
             return res.render('pages/tables', {
                 data: result,
+                success: req.flash('success'),
             });
         });
 };
@@ -37,6 +38,9 @@ const update = async (req, res) => {
         username: req.body.username,
         email: req.body.email,
     });
+    req.flash('success', {
+        msg: 'Update successful',
+    });
     return res.redirect('/admin/table');
 };
 // delete
@@ -44,6 +48,9 @@ const Delete = async (req, res) => {
     await knex('users').where({
         id: req.params.id,
     }).delete();
+    req.flash('success', {
+        msg: 'user has been deleted',
+    });
     return res.redirect('/admin/table');
 };
 

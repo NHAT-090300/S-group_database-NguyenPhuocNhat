@@ -31,13 +31,13 @@ const uploadImg = (req, res) => {
                 .catch(() => {
                     res.redirect('/product');
                 });
-        };
+        }
     });
 };
-const PagesProduct = (req, res) => {
-    knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*').then((result) => {
-        return res.render('pages/products/productTab', { data_: result });
-    });
+const PagesProduct = async (req, res) => {
+    let data_ = await knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*');
+    let data = await knex('productType').select('*');
+    return res.render('pages/products/productTab', { data,  data_ });
 };
 module.exports = {
     uploadImg,

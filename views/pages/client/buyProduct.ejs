@@ -14,6 +14,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <link href="/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <link href="/assets/demo/demo.css" rel="stylesheet" />
+  <style>
+    .tox{
+      margin-top: 30px;
+      margin-bottom: 30px;
+      border: 1px solid red;
+    }
+  </style>
 </head>
 
 <body class="">
@@ -43,6 +50,7 @@
                 <p>Create Product</p>
               </a>
             </li>
+
           </ul>
         </div>
       </div>
@@ -117,27 +125,48 @@
       </nav>
       <!-- End Navbar -->
 
+
       <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="d-flex ml-5  flex-wrap">
-                    <% data.forEach((product) => {%>
-                    <div class="card ml-3" style="width:260px;" >
-                        <img src="/uploads/<%= product.path %>" style="height:310px; width:260px" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title"><b>Product'name : </b> <%= product.product %></h5>
-                            <p class="card-text"><b>Price : </b> <%= product.price %></p>
-                            <p class="card-text"><b>Color : </b> <%= product.color %></p>
-                            <div class="d-flex">
-                                <a href="/Buy_product/<%= product.product_id %>" class="btn btn-primary">BUY</a>
-                            </div>
-                        </div>
-                    </div>
+                <form action="/admin/product/upload" style="position: relative; right: -85%;">  
+                    <a class="text-light ml-5" >
+                        <button class="btn btn-sm btn-success ">
+                         Back
+                        </button>
+                      </a>
+                </form>
+                <div class="d-flex flex-wrap ml-3 " >
+                    <% img.forEach((img) => {%>
+                    <img src="/uploads/<%= img.path %>" style="height:500px">
                     <% }); %>
+                    <div style="margin-left:100px;">
+                      <% product_.forEach((product) => {%>  
+                      <form method="POST" action="/Buy_product/<%= product.product_id %>"> 
+                            <h4><b style="color:royalblue">product's name</b> : <%= product.product %></h4>
+                            <h4><b style="color:royalblue">price</b> : <%= product.price %></h4>
+                            <h4><b style="color:royalblue">color</b> : <%= product.color %></h4>
+                            <input type="hidden" name="product_id" value="<%= product.product_id %>">
+                            <%- product.content %>
+                            <hr>
+                            <b>NOTE</b>
+                            <!-- tinyMCE -->
+                            <textarea name="titleUser" id="mytextarea"></textarea>
+                            <!-- /tinyMCE -->
+                            <input type="hidden" name="_method" value="POST">
+                            <a class="text-light ">
+                              <button class="btn btn-sm btn-success ">
+                                Save
+                              </button>
+                            </a>
+                        </form>
+                        <% }); %>
+                    </div> 
                 </div>
             </div>
         </div>
     </div>
+
       
       <!-- footer -->
       <footer class="footer">
@@ -246,6 +275,13 @@
       </ul>
     </div>
   </div>
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin">
+  </script>
+  <script>
+    tinymce.init({
+      selector: '#mytextarea',
+    });
+  </script>
   <!--   Core JS Files   -->
   <script src="/assets/js/core/jquery.min.js"></script>
   <script src="/assets/js/core/popper.min.js"></script>

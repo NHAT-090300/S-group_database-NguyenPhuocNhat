@@ -22,6 +22,8 @@ const {
     setProduct,
     getUploadImage,
     uploadImg,
+    getBuyProduct,
+    setBuyProduct,
 } = require('../../app/Client/product/product');
 
 
@@ -43,5 +45,8 @@ router.route('/upload_image/:product_type_id')
     .post(userIsNotAuth, uploadImg);
 router.route('/product')
     .get(userIsNotAuth, pageProduct);
+router.route('/Buy_product/:product_id')
+    .get(userIsNotAuth, getBuyProduct)
+    .post(userIsNotAuth, setBuyProduct);
 
 module.exports = router;

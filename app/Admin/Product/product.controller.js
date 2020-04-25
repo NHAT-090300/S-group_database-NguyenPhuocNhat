@@ -5,6 +5,7 @@ const renderProductList = (req, res) => {
         .then((result) => {
             res.render('pages/products/productList', {
                 data: result,
+                success: req.flash('success'),
             });
         });
 };
@@ -50,6 +51,7 @@ const productPost = async (req, res) => {
         price: req.body.price,
         color: req.body.color,
         type_id: req.body.type_id,
+        content: req.body.title,
     }).then(() => {
         res.redirect('/admin/product');
     });
@@ -59,8 +61,12 @@ const proTypeDelete = async (req, res) => {
     await knex('productType').where({
         product_type_id: req.params.product_type_id,
     }).delete();
+    req.flash('success', {
+        msg: 'product type has been deleted',
+    });
     return res.redirect('/admin/product');
 };
+//
 //
 const getProductId = async (req, res) => {
     const img = await knex('images').where({

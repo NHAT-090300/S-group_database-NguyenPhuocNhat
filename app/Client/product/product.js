@@ -48,6 +48,7 @@ const setProduct = (req, res) => {
         price: req.body.price,
         color: req.body.color,
         type_id: req.body.type_id,
+        content: req.body.titleUser,
     });
     return res.redirect('/product');
 };
@@ -58,7 +59,6 @@ const getUploadImage = async (req, res) => {
         .where('productType.product_type_id', req.params.product_type_id);
     return res.render('pages/client/uploadImage', { layout: false, products });
 };
-
 const uploadImg = (req, res) => {
     upload(req, res, async (err) => {
         if (err) throw err;
@@ -80,6 +80,29 @@ const uploadImg = (req, res) => {
         }
     });
 };
+// render pages buyProduct and note's user before buys the product.
+const getBuyProduct = async (req, res) => {
+    const img = await knex('images').where({
+        product_id: req.params.product_id,
+    }).select('*');
+    const product_ = await knex('product').where({
+        product_id: req.params.product_id,
+    }).select('*');
+    return res.render('pages/client/buyProduct', {
+        layout: false,
+        img,
+        product_,
+    });
+}; 
+// post note's user to database
+const setBuyProduct = (req, res) => {
+    knex('comments').insert({
+        content: req.body.titleUser,
+        title_id: req.body.product_id,
+    }).then(() => {
+        return res.redirect('/client_product');
+    });
+};
 module.exports = {
     Product,
     pageProduct,
@@ -89,4 +112,6 @@ module.exports = {
     setProduct,
     getUploadImage,
     uploadImg,
+    getBuyProduct,
+    setBuyProduct
 };

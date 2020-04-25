@@ -27,11 +27,13 @@
 			<div class="card-body">
 				<form method="post" action="/login">
 					<div class="flashes mx-3">
-						<% if (messages) { %>
-						  <% if (messages.errors) { %>
-							<div  style="color: #ffff; z-index: 100;" class="alert text-danger mb-0"><%= messages.errors %></div>
-						  <% } %>
-						<% } %>
+						<% if(errors) { %>
+							<% errors.forEach( error => { %>
+								<p class="alert text-danger mb-0 mx-3">
+									<%= error.msg %>
+								</p>
+							<% }) %>
+						 <% } %>
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">

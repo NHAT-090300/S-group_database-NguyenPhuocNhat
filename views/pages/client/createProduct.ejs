@@ -14,6 +14,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <link href="/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <link href="/assets/demo/demo.css" rel="stylesheet" />
+  <style>
+    .tox{
+      margin: 30px;
+      border: 1px solid red;
+    }
+  </style>
 </head>
 
 <body class="">
@@ -130,6 +136,9 @@
                         <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="price" type="text" placeholder="Price">
                         <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="color" type="text" placeholder="Color">
                         <input type="hidden" name="_method" value="POST">
+                        <!-- tinyMCE -->
+                        <textarea name="titleUser" class="mt-5" id="mytextarea"></textarea>
+                        <!-- /tinyMCE -->
                         <a class="text-light ml-5">
                           <button class="btn btn-sm btn-success ">
                             Save
@@ -250,6 +259,14 @@
       </ul>
     </div>
   </div>
+  
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin">
+</script>
+<script>
+  tinymce.init({
+    selector: '#mytextarea',
+  });
+</script>
   <!--   Core JS Files   -->
   <script src="/assets/js/core/jquery.min.js"></script>
   <script src="/assets/js/core/popper.min.js"></script>
