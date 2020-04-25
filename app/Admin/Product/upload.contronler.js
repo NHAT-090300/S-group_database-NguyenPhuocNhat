@@ -20,12 +20,13 @@ const uploadImg = (req, res) => {
             await knex('images').insert({
                     path: req.file.originalname,
                     product_id: req.body.product_id,
-                }).then((result) => {
+                }).then(async (result) => {
                     console.log(req.file);
-                    knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*').then((result) => {
-                        return res.render('pages/products/productTab', {
-                            data_: result,
-                        });
+                    let data_ = await knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*');
+                    let data = await knex('productType').select('*');
+                    return res.render('pages/products/productTab', {
+                        data_,
+                        data,
                     });
                 })
                 .catch(() => {

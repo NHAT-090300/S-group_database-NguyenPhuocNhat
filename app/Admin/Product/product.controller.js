@@ -1,4 +1,5 @@
 const knex = require('../../../knex/knex');
+const getSlug = require('speakingurl');
 // pages product;
 const renderProductList = (req, res) => {
     knex('productType').select('*')
@@ -15,7 +16,8 @@ const renderProductType = (req, res) => {
 };
 // create product;
 const renderProduct = async (req, res) => {
-    await knex('productType').select('*').where('product_type_id', req.params.product_type_id)
+    await knex('productType').select('*')
+        .where('product_type_slug', req.params.product_type_slug)
         .then((result) => {
             console.log(result);
             res.render('pages/products/createProduct', {
@@ -27,6 +29,7 @@ const renderProduct = async (req, res) => {
 const proTypePost = async (req, res) => {
     await knex('productType').insert({
             product_type: req.body.product_type,
+            product_type_slug: `${getSlug(req.body.product_type)}-${Date.now()}`,
         })
         .then(() => {
             return res.redirect('/admin/product');
@@ -38,7 +41,7 @@ const proTypePost = async (req, res) => {
 const showProduct = async (req, res) => {
     const products = await knex('productType')
         .rightJoin('product', 'productType.product_type_id', 'product.type_id')
-        .where('productType.product_type_id', req.params.product_type_id);
+        .where('productType.product_type_slug', req.params.product_type_slug);
     console.log(products);
     return res.render('pages/products/ShowProduct', {
         products,
@@ -52,6 +55,7 @@ const productPost = async (req, res) => {
         color: req.body.color,
         type_id: req.body.type_id,
         content: req.body.title,
+        product_slug: `${getSlug(req.body.product)}-${Date.now()}`,
     }).then(() => {
         res.redirect('/admin/product');
     });
@@ -59,7 +63,7 @@ const productPost = async (req, res) => {
 // delete product type
 const proTypeDelete = async (req, res) => {
     await knex('productType').where({
-        product_type_id: req.params.product_type_id,
+        product_type_slug: req.params.product_type_slug,
     }).delete();
     req.flash('success', {
         msg: 'product type has been deleted',
@@ -73,7 +77,7 @@ const getProductId = async (req, res) => {
         product_id: req.params.product_id,
     }).select('*');
     const product_ = await knex('product').where({
-        product_id: req.params.product_id,
+        product_slug: req.params.product_slug,
     }).select('*');
     return res.render('pages/products/updateProduct', {
         img,

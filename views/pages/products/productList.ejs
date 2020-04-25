@@ -47,15 +47,15 @@
                       </td>
                       <td style="z-index:100 d-flex" class="text-center">
                         <div class="d-flex justify-content-center">
-                          <a class="text-light" href="/admin/product/show_product_type/<%= type.product_type_id %>">
+                          <a class="text-light" href="/admin/product/show_product_type/<%= type.product_type_slug %>">
                             <button class="btn btn-sm btn-primary">
                               Show Product
                             </button>
                           </a>
-                          <form action="/admin/product/deleteProductType/<%= type.product_type_id %>/?_method=DELETE" method="POST"> 
+                          <form action="/admin/product/deleteProductType/<%= type.product_type_slug %>/?_method=DELETE" method="POST"> 
                             <button type="submit" onclick="checkDelete()"  class="btn btn-sm btn-primary">Delete</button>
                         </form>
-                          <a class="text-light" href="/admin/product/createProduct/<%= type.product_type_id %>">
+                          <a class="text-light" href="/admin/product/createProduct/<%= type.product_type_slug %>">
                             <button class="btn btn-sm btn-primary">
                               Create Product
                             </button>

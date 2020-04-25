@@ -17,7 +17,7 @@
                         <p class="card-text"><b>Price : </b> <%= product.price %></p>
                         <p class="card-text"><b>Color : </b> <%= product.color %></p>
                         <div class="d-flex">
-                            <a href="/admin/get_product/<%= product.product_id %>" class="btn btn-primary">GO</a>
+                            <a href="/admin/get_product/<%= product.product_id %>/<%= product.product_slug %>" class="btn btn-primary">GO</a>
                             <form action="/admin/delete_product/<%= product.product_id %>/?_method=DELETE" method="POST"> 
                                 <button type="submit"  class="btn btn-primary text-capitalize">Delete</button>
                             </form>

@@ -64,16 +64,16 @@ router.route('/admin/product/createType')
     .get(userIsNotAuth, IsAdmin, renderProductType)
     .post(userIsNotAuth, proTypePost);
 
-router.get('/admin/product/show_product_type/:product_type_id', userIsNotAuth, showProduct);
-router.delete('/admin/product/deleteProductType/:product_type_id', userIsNotAuth, proTypeDelete);
+router.get('/admin/product/show_product_type/:product_type_slug', userIsNotAuth, showProduct);
+router.delete('/admin/product/deleteProductType/:product_type_slug', userIsNotAuth, proTypeDelete);
 
-router.get('/admin/product/createProduct/:product_type_id', userIsNotAuth, renderProduct);
+router.get('/admin/product/createProduct/:product_type_slug', userIsNotAuth, renderProduct);
 router.post('/admin/product/createProduct', userIsNotAuth, productPost);
 
 router.get('/admin/product/upload', userIsNotAuth, PagesProduct);
 router.post('/admin/product/upload/:product_id', userIsNotAuth, uploadImg);
 
-router.get('/admin/get_product/:product_id', userIsNotAuth, getProductId);
+router.get('/admin/get_product/:product_id/:product_slug', userIsNotAuth, getProductId);
 router.delete('/admin/delete_product/:product_id', userIsNotAuth, deleteProduct);
 
 module.exports = router;

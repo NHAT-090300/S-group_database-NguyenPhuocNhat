@@ -37,15 +37,16 @@ router.route('/client_product')
 router.route('/create_productType')
     .get(userIsNotAuth, getProductType)
     .post(userIsNotAuth, setProductType);
-router.route('/create_product/:product_type_id')
-    .get(userIsNotAuth, IsUser, createProduct)
+router.route('/create_product/:product_type_slug')
+    .get(userIsNotAuth, IsUser, createProduct);
+router.route('/create_product')
     .post(userIsNotAuth, setProduct);
-router.route('/upload_image/:product_type_id')
+router.route('/upload_image/:product_type_id/:product_type_slug')
     .get(userIsNotAuth, getUploadImage)
     .post(userIsNotAuth, uploadImg);
 router.route('/product')
     .get(userIsNotAuth, pageProduct);
-router.route('/Buy_product/:product_id')
+router.route('/Buy_product/:product_id/:product_slug')
     .get(userIsNotAuth, getBuyProduct)
     .post(userIsNotAuth, setBuyProduct);
 

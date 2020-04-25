@@ -1,4 +1,5 @@
 const knex = require('../../../knex/knex');
+const getSlug = require('speakingurl');
 const multer = require('multer');
 // let upload = multer({ dest: 'upload/' }) tạo folder nếu ko tìm thấy folder.
 const storage = multer.diskStorage({
@@ -16,9 +17,11 @@ const upload = multer({
 // render product tab
 const Product = async (req, res) => {
     const data = await knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*');
+    let dataType = await knex('productType').select('*');
     return res.render('pages/client/clientProduct', {
         layout: false,
         data,
+        dataType,
     });
 };
 // render main page product
@@ -33,22 +36,27 @@ const getProductType = (req, res) => {
 const setProductType = async (req, res) => {
     await knex('productType').insert({
         product_type: req.body.product_type,
+        product_type_slug: `${getSlug(req.body.product_type)}-${Date.now()}`,
     })
     .then(() => {
-        return res.redirect('/create_product');
+        return res.redirect('/product');
     });
 };
 // render page used to create the product
-const createProduct = (req, res) => {
-    return res.render('pages/client/createProduct', { layout: false });
+const createProduct = async (req, res) => {
+    let type = await knex('productType')
+    .where({'product_type_slug': req.params.product_type_slug})
+    .select('*');
+    return res.render('pages/client/createProduct', { layout: false, type });
 };
-const setProduct = (req, res) => {
-    knex('product').insert({
+const setProduct = async (req, res) => {
+    await knex('product').insert({
         product: req.body.product,
         price: req.body.price,
         color: req.body.color,
         type_id: req.body.type_id,
         content: req.body.titleUser,
+        product_slug: `${getSlug(req.body.product)}-${Date.now()}`,
     });
     return res.redirect('/product');
 };
