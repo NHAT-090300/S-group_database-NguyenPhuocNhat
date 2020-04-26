@@ -1,5 +1,5 @@
-const knex = require('../../../knex/knex');
 const getSlug = require('speakingurl');
+const knex = require('../../../knex/knex');
 // pages product;
 const renderProductList = (req, res) => {
     knex('productType').select('*')
@@ -71,7 +71,6 @@ const proTypeDelete = async (req, res) => {
     return res.redirect('/admin/product');
 };
 //
-//
 const getProductId = async (req, res) => {
     const img = await knex('images').where({
         product_id: req.params.product_id,
@@ -79,9 +78,17 @@ const getProductId = async (req, res) => {
     const product_ = await knex('product').where({
         product_slug: req.params.product_slug,
     }).select('*');
+    const commentProduct = await knex('product')
+    .innerJoin('comments', 'product.product_id', 'comments.title_id')
+    .where({
+        product_id: req.params.product_id,
+    })
+    .select('*');
+    console.log(commentProduct);
     return res.render('pages/products/updateProduct', {
         img,
         product_,
+        commentProduct,
     });
 };
 
@@ -94,6 +101,24 @@ const deleteProduct = async (req, res) => {
     }).delete();
     return res.redirect('/admin/product/upload');
 };
+
+// show a product type on desktop screen
+const showCardAType = async (req, res) => {
+    const data__ = await knex('product')
+    .innerJoin('productType', 'product.type_id', 'productType.product_type_id')
+    .innerJoin('images', 'product.product_id', 'images.product_id')
+    .select('*');
+    let data_ = data__.filter((a, b) => {
+        return a.product_type_id == parseInt(req.params.product_type_id);
+    })
+    const data = await knex('productType').select('*');
+    console.log(data_)
+    return res.render('pages/products/showAtype', {
+        data_,
+        data,
+    });
+};
+
 module.exports = {
     renderProductType,
     renderProduct,
@@ -104,4 +129,5 @@ module.exports = {
     showProduct,
     getProductId,
     deleteProduct,
+    showCardAType,
 };

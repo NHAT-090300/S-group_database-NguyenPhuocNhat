@@ -23,7 +23,7 @@ const renderRegister = (req, res) => {
 const registerMethod = async (req, res) => {
     check('username').isEmail();
     check('password').isLength({ min: 6 });
-    let errors = validationResult(req);
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.redirect('/admin/register');
     } else {

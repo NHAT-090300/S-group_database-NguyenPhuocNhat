@@ -22,8 +22,8 @@ const uploadImg = (req, res) => {
                     product_id: req.body.product_id,
                 }).then(async (result) => {
                     console.log(req.file);
-                    let data_ = await knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*');
-                    let data = await knex('productType').select('*');
+                    const data_ = await knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*');
+                    const data = await knex('productType').select('*');
                     return res.render('pages/products/productTab', {
                         data_,
                         data,
@@ -36,9 +36,9 @@ const uploadImg = (req, res) => {
     });
 };
 const PagesProduct = async (req, res) => {
-    let data_ = await knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*');
-    let data = await knex('productType').select('*');
-    return res.render('pages/products/productTab', { data,  data_ });
+    const data_ = await knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*');
+    const data = await knex('productType').select('*');
+    return res.render('pages/products/productTab', { data, data_ });
 };
 module.exports = {
     uploadImg,

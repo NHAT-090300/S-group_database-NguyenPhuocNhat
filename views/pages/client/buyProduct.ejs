@@ -135,7 +135,7 @@
                     <% }); %>
                     <div style="margin-left:100px;">
                       <% product_.forEach((product) => {%>  
-                      <form method="POST" action="/Buy_product/<%= product.product_id %>"> 
+                      <form method="POST" action="/Buy_product/<%= product.product_id %>/<%= product.product_slug %>"> 
                             <h4><b style="color:royalblue">product's name</b> : <%= product.product %></h4>
                             <h4><b style="color:royalblue">price</b> : <%= product.price %></h4>
                             <h4><b style="color:royalblue">color</b> : <%= product.color %></h4>

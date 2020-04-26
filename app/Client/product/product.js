@@ -1,6 +1,6 @@
-const knex = require('../../../knex/knex');
 const getSlug = require('speakingurl');
 const multer = require('multer');
+const knex = require('../../../knex/knex');
 // let upload = multer({ dest: 'upload/' }) tạo folder nếu ko tìm thấy folder.
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -17,7 +17,7 @@ const upload = multer({
 // render product tab
 const Product = async (req, res) => {
     const data = await knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*');
-    let dataType = await knex('productType').select('*');
+    const dataType = await knex('productType').select('*');
     return res.render('pages/client/clientProduct', {
         layout: false,
         data,
@@ -44,8 +44,8 @@ const setProductType = async (req, res) => {
 };
 // render page used to create the product
 const createProduct = async (req, res) => {
-    let type = await knex('productType')
-    .where({'product_type_slug': req.params.product_type_slug})
+    const type = await knex('productType')
+    .where({ product_type_slug : req.params.product_type_slug})
     .select('*');
     return res.render('pages/client/createProduct', { layout: false, type });
 };
@@ -101,7 +101,7 @@ const getBuyProduct = async (req, res) => {
         img,
         product_,
     });
-}; 
+};
 // post note's user to database
 const setBuyProduct = (req, res) => {
     knex('comments').insert({
@@ -111,6 +111,25 @@ const setBuyProduct = (req, res) => {
         return res.redirect('/client_product');
     });
 };
+
+// show a product type on desktop screen
+const showCardAType = async (req, res) => {
+    const data_ = await knex('product')
+    .innerJoin('productType', 'product.type_id', 'productType.product_type_id')
+    .innerJoin('images', 'product.product_id', 'images.product_id')
+    .select('*');
+    let data = data_.filter((a) => {
+        return a.product_type_id == parseInt(req.params.product_type_id);
+    });
+    const dataType = await knex('productType').select('*');
+    console.log(dataType);
+    return res.render('pages/client/clientProduct', {
+        layout: false,
+        dataType,
+        data,
+    });
+};
+
 module.exports = {
     Product,
     pageProduct,
@@ -121,5 +140,6 @@ module.exports = {
     getUploadImage,
     uploadImg,
     getBuyProduct,
-    setBuyProduct
+    setBuyProduct,
+    showCardAType
 };

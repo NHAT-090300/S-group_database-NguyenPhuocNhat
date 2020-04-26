@@ -31,6 +31,7 @@ const {
     showProduct,
     getProductId,
     deleteProduct,
+    showCardAType,
 } = require('../../app/Admin/Product/product.controller');
 const {
     uploadImg,
@@ -73,7 +74,9 @@ router.post('/admin/product/createProduct', userIsNotAuth, productPost);
 router.get('/admin/product/upload', userIsNotAuth, PagesProduct);
 router.post('/admin/product/upload/:product_id', userIsNotAuth, uploadImg);
 
-router.get('/admin/get_product/:product_id/:product_slug', userIsNotAuth, getProductId);
+router.get('/admin/get_product/:product_id/:product_slug', userIsNotAuth, IsAdmin, getProductId);
 router.delete('/admin/delete_product/:product_id', userIsNotAuth, deleteProduct);
 
+router.route('/admin/product/:product_type_id/:product_type_slug')
+    .get(userIsNotAuth, IsAdmin, showCardAType);
 module.exports = router;

@@ -3,26 +3,55 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <form action="/admin/product/upload" style="position: relative; right: -85%;">  
-                <a class="text-light ml-5" >
-                    <button class="btn btn-sm btn-success ">
-                     Back
-                    </button>
-                  </a>
-            </form>
-            <div class="d-flex  ml-3 " >
+            <div class="d-flex " >
                 <% img.forEach((img) => {%>
-                <img src="/uploads/<%= img.path %>" style="height:500px">
+                <img src="/uploads/<%= img.path %>" style="margin-left: 10px; width: 40%;">
                 <% }); %>
-                <div style="margin-left:100px;">
+                <div class="pl-5" style="width: 60%;">
                     <% product_.forEach((product) => {%>
                     <h4><b style="color:royalblue">product's name</b> : <%= product.product %></h4>
                     <h4><b style="color:royalblue">price</b> : <%= product.price %></h4>
                     <h4><b style="color:royalblue">color</b> : <%= product.color %></h4>
-                    <%- product.content %>
-                    <% }); %>
+                    <h4><b style="color:royalblue">product introduction</b> : <%- product.content %></h4>
+                    <% }); %>                    
+                    <div class="card" >
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title "> comments </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="text-primary">
+                                        <th>
+                                            ID
+                                        </th>
+                                        <th>
+                                            product 
+                                        </th>
+                                        <th>
+                                            content
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <% commentProduct.forEach((comment) => { %>
+                                        <tr>
+                                            <td>
+                                                <%= comment.product_id %>
+                                            </td>
+                                            <td>
+                                                <%= comment.product %>
+                                            </td>
+                                            <td>
+                                                <%- comment.content %>
+                                            </td>
+                                      </tr>
+                                      <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div> 
-
             </div>
         </div>
     </div>
