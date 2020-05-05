@@ -1,11 +1,13 @@
 # S-group_database-NguyenPhuocNhat
-#### Nodejs and Expressjs
+###
+ chú ý:
+#### NODEJS and EXPRESSJS
 - **Khái niệm `NODEJS`** : https://bit.ly/2I8KgHt.
 - **Khái niệm `NPM`** :  https://bit.ly/3cjhz8C.
 - **Khái niệm `HTTP METHOD`** :  https://bit.ly/3csgZpl.
 - **Khái niệm `MVC`** : https://bit.ly/3cp0lXh.
 - **`ExpressJS and EXPRESSJS GENERATOR`** :   https://bit.ly/2Ic4XT2 ,  https://bit.ly/2IcI5Ts.
-#### DATABASE, SESSION and AUTHENTICATION (*Buoi 2*)
+#### DATABASE, SESSION and AUTHENTICATION
 - **tài liệu tham khảo `MYSQL`** : http://bit.ly/2TFBYO1.
 - **tài liệu tham khảo `Knex` và `Config Knex`** :  http://bit.ly/2wEYXzJ , http://bit.ly/2vSpOrU.
 - **Khái niệm `session` và cài đặt** :  http://bit.ly/3azemjE,  (http://bit.ly/2IAZQMl,  http://bit.ly/2U5cEjx).
