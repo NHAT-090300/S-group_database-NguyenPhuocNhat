@@ -148,9 +148,9 @@
                       </div> 
                     </div>
                     <hr>
+                    <h4><b style="color:royalblue">product introduction</b> : <%- product.content %></h4>
                     <form method="POST" action="/Buy_product/<%= product.product_id %>/<%= product.product_slug %>"> 
                       <input type="hidden" name="product_id" value="<%= product.product_id %>">
-                      <%- product.content %>
                       <hr>
                       <b>NOTE</b>
                       <!-- tinyMCE -->

@@ -53,8 +53,8 @@ let uploads = multer({
 })
 .array('images', 10);
 const uploadImgs = (req, res) => {
-    uploads(req, res , (err) => {
-        if (err) throw err
+    uploads(req, res, (err) => {
+        if (err) throw err;
         else {
             let arr = req.files;
             for ( let i of arr) {
@@ -63,8 +63,8 @@ const uploadImgs = (req, res) => {
             console.log(imgs);
             return res.json({ location: `/uploads/${imgs}`});
         }
-    })
-}
+    });
+};
 
 const PagesProduct = async (req, res) => {
     const data_ = await knex('product').innerJoin('images', 'product.product_id', 'images.product_id').select('*');
@@ -74,5 +74,5 @@ const PagesProduct = async (req, res) => {
 module.exports = {
     uploadImg,
     PagesProduct,
-    uploadImgs
+    uploadImgs,
 };

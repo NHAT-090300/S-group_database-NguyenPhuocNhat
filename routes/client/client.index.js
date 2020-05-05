@@ -24,10 +24,11 @@ const {
     // uploadImg,
     getBuyProduct,
     setBuyProduct,
-    showCardAType
+    showCardAType,
 } = require('../../app/Client/product/product');
 const {
-    uploadImg
+    uploadImg,
+    uploadImgs
 } = require('../../app/Client/product/uploadImg');
 
 
@@ -55,4 +56,6 @@ router.route('/Buy_product/:product_id/:product_slug')
     .post(userIsNotAuth, setBuyProduct);
 router.route('/product/:product_type_id/:product_type_slug')
     .get(userIsNotAuth, IsUser, showCardAType);
+router.route('/uploadImages')
+    .post(userIsNotAuth, uploadImgs);
 module.exports = router;

@@ -34,7 +34,35 @@ const uploadImg = (req, res) => {
         }
     });
 };
+// upload img tinyMCE
+const storages = multer.diskStorage({
+    destination: function(req, files, cb) {
+        cb(null, './public/uploads');
+    },
+    filename: function(req, files, cb) {
+        cb(null, files.originalname);
+    },
+});
+let uploads = multer({
+    storage: storages,
+}).array('images', 10);
+const uploadImgs = (req, res) => {
+    uploads(req, res, (err) => {
+        if (err) throw err;
+        else {
+            console.log(req.files);
+            let arr = req.files;
+            for ( let i of arr) {
+                imgs = i.filename;
+            }
+            console.log(imgs);
+            return res.json({ location: `/uploads/${imgs}`});
+        }
+    });
+};
+
 
 module.exports = {
     uploadImg,
-}
+    uploadImgs,
+};

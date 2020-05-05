@@ -69,8 +69,7 @@ const productPost = async (req, res) => {
             tagID: tag[0],
             postID: post[0],
         });
-    };
-
+    }
     return res.redirect('/admin/product');
 };
 
@@ -106,7 +105,7 @@ const getProductId = async (req, res) => {
     .rightJoin('tag', 'post_tag.tagID', 'tag.id')
     .leftJoin('product', 'post_tag.postID', 'product.product_id')
     .leftJoin('productType', 'product.type_id', 'productType.product_type_id')
-    .where({ postID: req.params.product_id})
+    .where({ postID: req.params.product_id});
     console.log(showTag);
     return res.render('pages/products/updateProduct', {
         img,
@@ -134,16 +133,16 @@ const showCardAType = async (req, res) => {
     .select('*');
     let data_ = data__.filter((a, b) => {
         return a.product_type_id == parseInt(req.params.product_type_id);
-    })
+    });
     const data = await knex('productType').select('*');
-    console.log(data_)
+    console.log(data_);
     return res.render('pages/products/showAtype', {
         data_,
         data,
     });
 };
 
-// show tag 
+// show tag
 
 module.exports = {
     renderProductType,
@@ -156,5 +155,4 @@ module.exports = {
     getProductId,
     deleteProduct,
     showCardAType,
-    // postTag,
 };
