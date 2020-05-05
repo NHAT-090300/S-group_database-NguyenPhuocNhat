@@ -36,7 +36,9 @@ const {
 const {
     uploadImg,
     PagesProduct,
+    uploadImgs
 } = require('../../app/Admin/product/upload.contronler');
+
 const {
     IsAdmin,
 } = require('../../app/Admin/Auth/AuthMiddleware/AuthzationMiddleware');
@@ -79,4 +81,7 @@ router.delete('/admin/delete_product/:product_id', userIsNotAuth, deleteProduct)
 
 router.route('/admin/product/:product_type_id/:product_type_slug')
     .get(userIsNotAuth, IsAdmin, showCardAType);
+router.route('/admin/uploadImg')
+    .post(userIsNotAuth, uploadImgs);
+
 module.exports = router;

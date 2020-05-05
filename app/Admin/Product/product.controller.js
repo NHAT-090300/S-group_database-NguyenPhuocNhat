@@ -37,7 +37,7 @@ const proTypePost = async (req, res) => {
             if (err) throw err;
         });
 };
-// get Product type;
+// get Product type
 const showProduct = async (req, res) => {
     const products = await knex('productType')
         .rightJoin('product', 'productType.product_type_id', 'product.type_id')
@@ -47,19 +47,34 @@ const showProduct = async (req, res) => {
         products,
     });
 };
-
+// create product
 const productPost = async (req, res) => {
-    await knex('product').insert({
+    // add post and product
+    let post = await knex('product').insert({
         product: req.body.product,
         price: req.body.price,
         color: req.body.color,
         type_id: req.body.type_id,
         content: req.body.title,
         product_slug: `${getSlug(req.body.product)}-${Date.now()}`,
-    }).then(() => {
-        res.redirect('/admin/product');
     });
+    // add tags 
+    let tags = req.body.name.split(',');
+    let setTag = [...new Set(tags)];
+    for (i = 0; i < setTag.length; i++) {
+        var tag = await knex('tag').insert({
+            name: tags[i],
+        });
+        await knex('post_tag').insert({
+            tagID: tag[0],
+            postID: post[0],
+        });
+    };
+
+    return res.redirect('/admin/product');
 };
+
+
 // delete product type
 const proTypeDelete = async (req, res) => {
     await knex('productType').where({
@@ -72,23 +87,32 @@ const proTypeDelete = async (req, res) => {
 };
 //
 const getProductId = async (req, res) => {
+    // select image
     const img = await knex('images').where({
         product_id: req.params.product_id,
     }).select('*');
+    // select product
     const product_ = await knex('product').where({
         product_slug: req.params.product_slug,
     }).select('*');
+    // show comments of client
     const commentProduct = await knex('product')
     .innerJoin('comments', 'product.product_id', 'comments.title_id')
     .where({
         product_id: req.params.product_id,
-    })
-    .select('*');
-    console.log(commentProduct);
+    }).select('*');
+    // show tag of product
+    const showTag = await knex('post_tag')
+    .rightJoin('tag', 'post_tag.tagID', 'tag.id')
+    .leftJoin('product', 'post_tag.postID', 'product.product_id')
+    .leftJoin('productType', 'product.type_id', 'productType.product_type_id')
+    .where({ postID: req.params.product_id})
+    console.log(showTag);
     return res.render('pages/products/updateProduct', {
         img,
         product_,
         commentProduct,
+        showTag,
     });
 };
 
@@ -119,6 +143,8 @@ const showCardAType = async (req, res) => {
     });
 };
 
+// show tag 
+
 module.exports = {
     renderProductType,
     renderProduct,
@@ -130,4 +156,5 @@ module.exports = {
     getProductId,
     deleteProduct,
     showCardAType,
+    // postTag,
 };

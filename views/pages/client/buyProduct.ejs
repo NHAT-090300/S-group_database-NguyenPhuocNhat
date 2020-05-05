@@ -128,34 +128,44 @@
 
       <div class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="d-flex flex-wrap ml-3 " >
-                    <% img.forEach((img) => {%>
-                    <img src="/uploads/<%= img.path %>" style="height:500px">
-                    <% }); %>
-                    <div style="margin-left:100px;">
-                      <% product_.forEach((product) => {%>  
-                      <form method="POST" action="/Buy_product/<%= product.product_id %>/<%= product.product_slug %>"> 
-                            <h4><b style="color:royalblue">product's name</b> : <%= product.product %></h4>
-                            <h4><b style="color:royalblue">price</b> : <%= product.price %></h4>
-                            <h4><b style="color:royalblue">color</b> : <%= product.color %></h4>
-                            <input type="hidden" name="product_id" value="<%= product.product_id %>">
-                            <%- product.content %>
-                            <hr>
-                            <b>NOTE</b>
-                            <!-- tinyMCE -->
-                            <textarea name="titleUser" id="mytextarea"></textarea>
-                            <!-- /tinyMCE -->
-                            <input type="hidden" name="_method" value="POST">
-                            <a class="text-light ">
-                              <button class="btn btn-sm btn-success ">
-                                Save
-                              </button>
-                            </a>
-                        </form>
-                        <% }); %>
-                    </div> 
+            <div class="row"> 
+              <div style="margin: 0 auto;">
+                <div class="p-3" style="width: 100%; border: 1px solid">
+                  <% product_.forEach((product) => {%>   
+                    <div class="d-flex ml-3" >
+                      <% img.forEach((img) => {%>
+                        <img src="/uploads/<%= img.path %>"  style="margin-left: 10px; width: 20%; filter: grayscale(100%);">
+                      <% }); %>
+                      <div class="ml-5">
+                          <h4><b style="color:royalblue">product's name</b> : <%= product.product %></h4>
+                          <h4><b style="color:royalblue">price</b> : <%= product.price %></h4>
+                          <h4><b style="color:royalblue">color</b> : <%= product.color %></h4> 
+                          <div class="mr-5 d-flex flex-wrap">
+                            <% showTag.forEach((tag) => { %>
+                                <a class="text-decoration-none bg-secondary mr-3 pl-2 pr-2" style="color:white; border-radius: 8px;" href="/product/<%= tag.product_type_id %>/<%= tag.product_type_slug %>"> <%= tag.name %></a>
+                            <% }); %>
+                        </div>
+                      </div> 
+                    </div>
+                    <hr>
+                    <form method="POST" action="/Buy_product/<%= product.product_id %>/<%= product.product_slug %>"> 
+                      <input type="hidden" name="product_id" value="<%= product.product_id %>">
+                      <%- product.content %>
+                      <hr>
+                      <b>NOTE</b>
+                      <!-- tinyMCE -->
+                      <textarea name="titleUser" id="mytextarea"></textarea>
+                      <!-- /tinyMCE -->
+                      <input type="hidden" name="_method" value="POST">
+                      <a class="text-light ">
+                        <button class="btn btn-sm btn-success ">
+                          Save
+                        </button>
+                      </a>
+                  </form>
+                  <% }); %>
                 </div>
+              </div>
             </div>
         </div>
     </div>

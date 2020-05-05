@@ -21,11 +21,14 @@ const {
     createProduct,
     setProduct,
     getUploadImage,
-    uploadImg,
+    // uploadImg,
     getBuyProduct,
     setBuyProduct,
     showCardAType
 } = require('../../app/Client/product/product');
+const {
+    uploadImg
+} = require('../../app/Client/product/uploadImg');
 
 
 router.route('/register')

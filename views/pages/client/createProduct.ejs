@@ -136,6 +136,7 @@
                         <input class="border-right-0  mr-3 border-left-0 border-top-0 border-primary" name="product" type="text" placeholder="Product's Name">
                         <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="price" type="text" placeholder="Price">
                         <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="color" type="text" placeholder="Color">
+                        <input class="border-right-0 mr-3 border-left-0 border-top-0 border-primary" name="name" type="text" placeholder="tag">
                         <input type="hidden" name="type_id" value="<%= type.product_type_id %>">
                         <input type="hidden" name="_method" value="POST">
                       <% }); %>
@@ -266,8 +267,44 @@
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin">
 </script>
 <script>
-  tinymce.init({
+   tinymce.init({
     selector: '#mytextarea',
+    // thêm plugin vào để có phần insert image trên navbar
+    plugins: [ 'image' ],
+    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage',
+    // Thêm hàm xử lí upload hình ảnh
+    images_upload_handler: function (blobInfo, success, failure) {
+      var xhr, formData;
+      // Tạo một XML Http request 
+      xhr = new XMLHttpRequest();
+      xhr.withCredentials = false;
+      // Xử lí upload
+      xhr.open('POST', '/admin/uploadImg');
+      // Xử lí response nhận về từ server
+      xhr.onload = function() {
+        var json;
+
+      if (xhr.status != 200) {
+        failure('HTTP Error: ' + xhr.status);
+        return;
+      }
+			// response từ server
+      json = JSON.parse(xhr.responseText);
+
+      if (!json || typeof json.location != 'string') {
+        failure('Invalid JSON: ' + xhr.responseText);
+        return;
+      }
+			// Append hình ảnh vào tinyMCE
+      success(json.location);
+      };
+      // Định nghĩa formdata object gửi lên server
+      formData = new FormData();
+      // Append vào thông tin của hình ảnh 
+      formData.append('images', blobInfo.blob(), blobInfo.filename());
+      // Gửi formdata này lên server
+      xhr.send(formData);
+    }
   });
 </script>
   <!--   Core JS Files   -->
